@@ -6,10 +6,10 @@
 
 def func_name():
     '''prints a string on the console''' #doc string
-    print('I am a function')
+    print('I am a function output')
 
 
-# func_name()
+func_name()
 
 #create a function that prints "hello there!", then call the function to see the output
 
@@ -17,7 +17,7 @@ def greetings():
     '''prints a greeting in English'''
     print('Hello there!')
 
-# greetings()
+greetings()
 
 # Passing ARGUMENTS to the function
 def greetings_adv(language, name):
@@ -142,11 +142,15 @@ def current_age():
 current_age()
 
 def happy_birthday():
-    # global age
+    global age
     # age += 1
-    if age > 12:
+    if age == 12:
         print('you have bat-mitzva')
-        age += 1
+        age += 1 #print(age) -> 13 - will happen only if the age is 12
+    else:
+        age += 1 #print(age) -> 26
+    
 
 
-happy_birthday()
+happy_birthday() #'you have bat-mitzva'
+print(age) #25

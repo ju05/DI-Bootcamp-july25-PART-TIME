@@ -1,4 +1,5 @@
-from datetime import datetime, date
+from datetime import datetime as dt, date
+from faker import Faker
 
 class Person:
 
@@ -9,21 +10,19 @@ class Person:
         self.last_name = self.format_name(last_name)
         self.birth_date = self.parse_birthdate(birth_date)
         Person.id_number += 1
+        self._email = None #protected attribute
 
     @staticmethod
     def parse_birthdate(date_str):
-        return datetime.strptime(date_str, '%d-%m-%Y').date()
+        return dt.strptime(date_str, '%d-%m-%Y').date()
     
     @staticmethod
     def format_name(name):
-        if not name[0].isupper():
-            return name.capitalize()
-        else:
-            return name
+        return name.capitalize()
         
     @classmethod
     def from_age(cls, name, last_name, age):
-        current_year = datetime.today().year
+        current_year = dt.today().year
         birth_year = current_year - age
         birth_date = f'1-1-{birth_year}'
         return cls(name, last_name,birth_date)
@@ -34,6 +33,16 @@ class Person:
         age = today.year - self.birth_date.year
         return age
     
+    @property
+    def email(self):
+        return self._email
+
+
+    @email.setter
+    def email(self, new_email):
+        self._email = new_email.lower()
+
+
     def __str__(self):
         return f'\n name: {self.name} \n last_name: {self.last_name} \n age: {self.age}'
     
@@ -49,7 +58,6 @@ class Person:
 
 p1 = Person('jon', 'snow', '21-08-1990')
 print(type(p1.age))
-
 # print(p1)
 
 p2 = Person.from_age('Arya', 'stark', 18)
@@ -65,6 +73,24 @@ print(p2 == p3)
 
 
 # create a static method that format the name and last name 
-# in case the first letter is not upper case. (search for isupper() method)
+# in case the first letter is not upper case. 
 # check that it works:
 # print(Person.format_name('lise'))
+
+#create a property method that generates an gmail with initial of the first name. a dot and last name complete
+# print(p1.email)
+
+p2.email = 'the.choosen@gmail.com'
+print(p2.email)
+
+#if we want this to work we need a setter
+
+#Modules - Faker
+fake = Faker()
+first_name = fake.first_name()
+last_name = fake.last_name()
+birth_date = dt.strftime(fake.date_of_birth(), '%d-%m-%Y')
+print(first_name)
+
+p4 = Person(first_name, last_name, birth_date)
+print(p4.age)

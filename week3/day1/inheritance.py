@@ -77,7 +77,7 @@ print(alien_dog1.bark())
 print(Dog.bark(alien_dog1)) #specifying from which class I want the method to be called
 
 # create a AlienCat class that inherit from Cat and Alien.
-# create a method fly_away that calls the method get_crazy(), prints it output and add 'as an alien cat'
+# create a method fly_away that calls the method get_crazy(), prints it output changind the "running" to "flying" and add 'as an alien cat'
 # 
 class AlienCat(Cat, Alien):
     def __init__(self, name, family, legs, friendly, age, nickname, planet):
@@ -90,4 +90,8 @@ class AlienCat(Cat, Alien):
 
 aliencat1 = AlienCat('Flufy', 'Feline', 6, False, 200, 'fluflu','jupyter')
 print(aliencat1.fly_away())
+
+dog3 = AlienDog('steve, digitando algo no codigo')
+
+
 
